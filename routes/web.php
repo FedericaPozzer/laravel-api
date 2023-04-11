@@ -24,6 +24,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
+Route::middleware("auth")
+    ->prefix("/admin")
+    ->name("admin.")
+    ->group(function() {
+        Route::resource("projects", ProjectController::class);
+    });
+
 Route::middleware('auth')
     ->prefix("/profile")
     ->name("profile.")

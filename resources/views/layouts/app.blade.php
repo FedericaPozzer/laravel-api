@@ -19,11 +19,11 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="bg-warning bg-opacity-75">
-    <div id="app">
+<body class="bg-dark bg-opacity-50">
+    <div>
         @include("layouts.partials.navbar")
 
-        <main class="">
+        <main class="container">
             @yield('content')
         </main>
     </div>

@@ -17,11 +17,16 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
+            @auth
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                    <a class="nav-link" href="{{url('home') }}">{{ __('Home') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.projects.index') }}">{{ __("Projects") }}</a>
                 </li>
             </ul>
+            @endauth
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
