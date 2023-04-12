@@ -66,7 +66,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view("admin.projects.edit", compact("project"));
     }
 
     /**
@@ -78,7 +78,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+
+        $project->fill($request->all());
+        $project->slug = Str::of($project->title)->slug("-");
+        $project->save();
+
+        return to_route("admin.projects.show", $project);
     }
 
     /**

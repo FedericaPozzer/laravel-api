@@ -36,4 +36,9 @@
         </div>
     
     </form>
+
+    <button type="button" class="btn btn-outline-secondary">
+        <a href="{{route('admin.projects.index')}}" class="text-dark"> Back to the list! </a>
+    </button>
+    
 @endsection
