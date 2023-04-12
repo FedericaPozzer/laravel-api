@@ -2,7 +2,7 @@
 
 @section("content")
 
-<h1 class=my-5>Projects</h1>
+<h1 class="my-5">Projects</h1>
 
 <table class="table table-warning table-striped">
     <thead>
@@ -19,9 +19,22 @@
         <th scope="row">{{$project->id}}</th>
         <td>{{$project->title}}</td>
         <td>{{$project->getAbstract()}}</td>
-        <td><a href="{{route("admin.projects.show", $project)}}">READ</a></td>
+        <td class="d-flex justify-content-between pe-3">
+            <a href="{{route("admin.projects.show", $project)}}">
+                <i class="bi bi-eyeglasses" rel="tooltip" title="More details"></i>
+            </a>
+
+            <a href="{{route("admin.projects.edit", $project)}}">
+                <i class="bi bi-pencil" rel="tooltip" title="Edit TODO"></i>
+            </a>
+
+            <a href="{{route("admin.projects.destroy", $project)}}">
+                <i class="bi bi-trash" rel="tooltip" title="Kill TODO"></i>
+            </a>
+        </td>
         </tr>
         @empty
+        <p>no projects available</p>
         @endforelse
     </tbody>
 </table> 
