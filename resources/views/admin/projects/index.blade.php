@@ -4,7 +4,7 @@
 
 <h1 class="my-5">Projects</h1>
 
-<table class="table table-warning table-striped">
+<table class="table table-primary table-striped">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -40,5 +40,10 @@
 </table> 
 
 {{$projects->links()}}
+
+
+<div class="my-3 d-flex w-100 justify-content-end">
+    <a href="{{ route('admin.projects.create') }}" type="button" class="btn btn-outline-primary">+ add new project</a>
+</div>
 
 @endsection

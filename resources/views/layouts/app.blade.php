@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 </head>
 
-<body class="bg-dark bg-opacity-50">
+<body class="bg-primary bg-opacity-10">
     <div>
         @include("layouts.partials.navbar")
 

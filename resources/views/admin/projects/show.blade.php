@@ -7,7 +7,7 @@
         <h2>{{$project->title}}</h2>
     </div>
     <div class="col-2">
-        <button type="button" class="btn btn-secondary text-dark">
+        <button type="button" class="btn btn-outline-secondary">
             <a href="{{route('admin.projects.index')}}" class="text-dark"> Back to the list! </a>
         </button>
     </div>
