@@ -6,7 +6,7 @@
 
 @include("layouts.partials.errors")
 
-<form action="{{ route("admin.projects.update", $project) }}" method="POST" class="row" enctype="multiport/from-data">
+<form action="{{ route("admin.projects.update", $project) }}" method="POST" class="row" enctype="multipart/form-data">
     @method("PUT")
     @csrf
 

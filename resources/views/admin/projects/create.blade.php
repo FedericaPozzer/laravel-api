@@ -6,7 +6,7 @@
 
 @include("layouts.partials.errors")
 
-<form action="{{ route("admin.projects.store") }}" method="POST" class="row" enctype="multiport/from-data">
+<form action="{{ route("admin.projects.store") }}" method="POST" class="row" enctype="multipart/form-data">
      @csrf
 
     <div class="col-6 d-flex flex-column">

@@ -39,28 +39,29 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-        [
-            "title" => "required|string|max:100",
-            "text" => "required|string",
-            "image" => "nullable|image|mimes:jpg,jpeg,png",
-        ], 
-        [
-            "title.required" => "Insert a title.",
-            "title.string" => "The title must be a string.",
-            "title.max" => "The title must be shorter than 100 characters.",
+        // $request->validate(
+        // [
+        //     "title" => "required|string|max:100",
+        //     "text" => "required|string",
+        //     "image" => "nullable|image|mimes:jpg,jpeg,png",
+        // ], 
+        // [
+        //     "title.required" => "Insert a title.",
+        //     "title.string" => "The title must be a string.",
+        //     "title.max" => "The title must be shorter than 100 characters.",
 
-            "text.required" => "Insert the text.",
-            "text.string" => "The text must be a string!",
+        //     "text.required" => "Insert the text.",
+        //     "text.string" => "The text must be a string!",
 
-            "image.image" => "Insert an image.",
-            "image.mimes" => "Extensions accepted: jpg, jpeg, png."
-        ]);
+        //     "image.image" => "Insert an image.",
+        //     "image.mimes" => "Extensions accepted: jpg, jpeg, png."
+        // ]);
+
 
         $data = $request->all();
 
         if(Arr::exists($data, "image")) {
-            Storage::put("uploads/projects", $data["image"]);
+            Storage::put("uploads", $data["image"]);
         };
 
         // if ($request->hasFile('image')) {
@@ -72,7 +73,7 @@ class ProjectController extends Controller
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
-        // dd($data);
+        dd($data);
 
         return to_route("admin.projects.show", $project);
        
@@ -109,23 +110,23 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $request->validate(
-        [
-            "title" => "required|string|max:100",
-            "text" => "required|string",
-            "image" => "nullable|image|mimes:jpg,jpeg,png",
-        ], 
-        [
-            "title.required" => "Insert a title.",
-            "title.string" => "The title must be a string.",
-            "title.max" => "The title must be shorter than 100 characters.",
+        // $request->validate(
+        // [
+        //     "title" => "required|string|max:100",
+        //     "text" => "required|string",
+        //     "image" => "nullable|image|mimes:jpg,jpeg,png",
+        // ], 
+        // [
+        //     "title.required" => "Insert a title.",
+        //     "title.string" => "The title must be a string.",
+        //     "title.max" => "The title must be shorter than 100 characters.",
 
-            "text.required" => "Insert the text.",
-            "text.string" => "The text must be a string!",
+        //     "text.required" => "Insert the text.",
+        //     "text.string" => "The text must be a string!",
 
-            "image.image" => "Insert an image.",
-            "image.mimes" => "Extensions accepted: jpg, jpeg, png."
-        ]);
+        //     "image.image" => "Insert an image.",
+        //     "image.mimes" => "Extensions accepted: jpg, jpeg, png."
+        // ]);
 
         $project->fill($request->all());
         $project->slug = Project::generateSlug($project->title);
