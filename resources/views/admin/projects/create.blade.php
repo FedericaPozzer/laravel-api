@@ -4,22 +4,24 @@
 
 <h2 class="my-5">Add a new project to the list!</h2>
 
-<form action="{{ route("admin.projects.store") }}" method="POST" class="row">
+@include("layouts.partials.errors")
+
+<form action="{{ route("admin.projects.store") }}" method="POST" class="row" enctype="multiport/from-data">
      @csrf
 
     <div class="col-6 d-flex flex-column">
         <div>
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control @error("title") is-invalid @enderror" id="title" name="title" value="{{ old("title") }}">
-            {{-- @error("title")
+            @error("title")
             <div class="invalid-feedback"> {{ $message }} </div>
-            @enderror --}}
+            @enderror
         </div>
 
         <div class="my-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" class="form-control @error("image") is-invalid @enderror" id="image" name="image" value="{{ old("image") }}">
-            {{-- @error("poster")
+            <input type="file" class="form-control @error("image") is-invalid @enderror" id="image" name="image">
+            {{-- @error("image")
             <div class="invalid-feedback"> {{ $message }} </div>
             @enderror --}}
         </div>
@@ -33,6 +35,9 @@
     <div class="col-6 d-flex flex-column">
         <label for="text" class="form-label">Text</label>
         <textarea class="border" name="text" id="text" rows="10"></textarea>
+        @error("text")
+            <div class="invalid-feedback"> {{ $message }} </div>
+        @enderror
     </div>
     
 </form>

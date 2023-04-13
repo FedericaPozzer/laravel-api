@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str; //per lo slug
+use Illuminate\Support\Arr; //per lo storage (immagini)
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -38,10 +39,40 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+        [
+            "title" => "required|string|max:100",
+            "text" => "required|string",
+            "image" => "nullable|image|mimes:jpg,jpeg,png",
+        ], 
+        [
+            "title.required" => "Insert a title.",
+            "title.string" => "The title must be a string.",
+            "title.max" => "The title must be shorter than 100 characters.",
+
+            "text.required" => "Insert the text.",
+            "text.string" => "The text must be a string!",
+
+            "image.image" => "Insert an image.",
+            "image.mimes" => "Extensions accepted: jpg, jpeg, png."
+        ]);
+
+        $data = $request->all();
+
+        if(Arr::exists($data, "image")) {
+            Storage::put("uploads/projects", $data["image"]);
+        };
+
+        // if ($request->hasFile('image')) {
+        //     Storage::put("uploads", $request->image);
+        // } Michele option
+
         $project = new Project;
-        $project->fill($request->all());
-        $project->slug = Str::of($project->title)->slug("-");
+        $project->fill($data);
+        $project->slug = Project::generateSlug($project->title);
         $project->save();
+
+        // dd($data);
 
         return to_route("admin.projects.show", $project);
        
@@ -78,9 +109,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate(
+        [
+            "title" => "required|string|max:100",
+            "text" => "required|string",
+            "image" => "nullable|image|mimes:jpg,jpeg,png",
+        ], 
+        [
+            "title.required" => "Insert a title.",
+            "title.string" => "The title must be a string.",
+            "title.max" => "The title must be shorter than 100 characters.",
+
+            "text.required" => "Insert the text.",
+            "text.string" => "The text must be a string!",
+
+            "image.image" => "Insert an image.",
+            "image.mimes" => "Extensions accepted: jpg, jpeg, png."
+        ]);
 
         $project->fill($request->all());
-        $project->slug = Str::of($project->title)->slug("-");
+        $project->slug = Project::generateSlug($project->title);
         $project->save();
 
         return to_route("admin.projects.show", $project);
