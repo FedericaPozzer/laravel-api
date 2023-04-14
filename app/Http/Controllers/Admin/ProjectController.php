@@ -61,8 +61,11 @@ class ProjectController extends Controller
         $data = $request->all();
 
         if(Arr::exists($data, "image")) {
-            Storage::put("uploads", $data["image"]);
+            $path = Storage::put("uploads/projects", $data["image"]);
+            $data["image"] = $path;
         };
+
+        // dd($path);
 
         // if ($request->hasFile('image')) {
         //     Storage::put("uploads", $request->image);
@@ -73,7 +76,7 @@ class ProjectController extends Controller
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
-        dd($data);
+        // dd($data);
 
         return to_route("admin.projects.show", $project);
        
