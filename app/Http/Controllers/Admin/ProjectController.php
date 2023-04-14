@@ -131,7 +131,15 @@ class ProjectController extends Controller
         //     "image.mimes" => "Extensions accepted: jpg, jpeg, png."
         // ]);
 
-        $project->fill($request->all());
+        $data = $request->all();
+
+        if(Arr::exists($data, "image")) {
+            if($project->image) Storage::delete($project->image);
+            $path = Storage::put("uploads/projects", $data["image"]);
+            $data["image"] = $path;
+        };
+
+        $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
 
@@ -146,7 +154,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        $id_project = $project->id;
+
+        if($project->image) Storage::delete($project->image);
         $project->delete();
+
         return redirect()->route("admin.projects.index");
     }
 }

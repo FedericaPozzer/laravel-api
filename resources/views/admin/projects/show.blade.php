@@ -15,7 +15,7 @@
 
 <section class="row">
     <div class="col-8">
-        <img src=" {{ asset("storage/" . $project->image) }} " alt="img">
+        <img src=" {{ $project->getImage() }} " alt="img">
     </div>
     <div class="col-4">
         <p>{{$project->text}}</p>

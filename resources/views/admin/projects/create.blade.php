@@ -24,6 +24,9 @@
             {{-- @error("image")
             <div class="invalid-feedback"> {{ $message }} </div>
             @enderror --}}
+            {{-- <div>
+                <img src="{{$project->getIamge()}}" alt="">
+            </div> --}}
         </div>
 
         <div class="mt-4  mt-auto">
