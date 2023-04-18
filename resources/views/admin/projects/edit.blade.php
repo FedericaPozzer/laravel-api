@@ -1,4 +1,6 @@
-@extends("layouts.app")
+{{-- NON IN USO -- VEDI FORM CENTRALIZZATO! 
+    
+    @extends("layouts.app")
 
 @section("content")
 
@@ -63,4 +65,4 @@
     <a href="{{route('admin.projects.index')}}" class="text-dark"> Back to the list! </a>
 </button>
 
-@endsection
+@endsection --}}
