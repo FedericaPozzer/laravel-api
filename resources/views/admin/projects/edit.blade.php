@@ -13,7 +13,7 @@
     <div class="col-6 d-flex flex-column">
         <div>
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control @error("title") is-invalid @enderror" id="title" name="title">
+            <input type="text" class="form-control @error("title") is-invalid @enderror" id="title" name="title" value="{{ old("title") ?? $project->title }}">
             @error("title")
             <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
