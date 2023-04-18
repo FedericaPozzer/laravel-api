@@ -10,6 +10,7 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Abstract</th>
+        <th scope="col">Type</th>
         <th scope="col">Details</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
         <th scope="row">{{$project->id}}</th>
         <td>{{$project->title}}</td>
         <td>{{$project->getAbstract()}}</td>
+        <td>{{$project->type?->name}}</td>
         <td class="d-flex justify-content-between pe-3">
             <a href="{{route("admin.projects.show", $project)}}">
                 <i class="bi bi-eyeglasses" rel="tooltip" title="More details"></i>

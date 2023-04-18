@@ -27,7 +27,23 @@
             @enderror
         </div>
 
-        <div class="mt-4  mt-auto">
+        <div class="my-4">
+            <label for="type_id">Type</label>
+            <select name="type_id" id="type_id" class="form-select mt-2" @error("type_id") is-invalid @enderror>
+                <option value="">None</option>
+
+                @foreach($types as $type)
+                <option @if(old("type_id", $project->type_id) == $type->id) selected @endif value="{{$type->id}}">{{$type->name}}</option>
+                @endforeach
+                
+                @error("type_id")
+                <div class="invalid-feedback"> {{ $message }} </div>
+                @enderror
+
+            </select>
+        </div>
+
+        <div class="mt-auto">
             <button type="submit" class="btn btn-outline-primary">Update the project</button>
         </div>
 
@@ -35,7 +51,7 @@
 
     <div class="col-6 d-flex flex-column">
         <label for="text" class="form-label">Text</label>
-        <textarea class="border" name="text" id="text" rows="10">{{ old("text") ?? $project->text }}</textarea>
+        <textarea class="border" name="text" id="text" rows="13">{{ old("text") ?? $project->text }}</textarea>
         @error("text")
             <div class="invalid-feedback"> {{ $message }} </div>
         @enderror

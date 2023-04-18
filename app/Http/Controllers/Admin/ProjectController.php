@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr; //per lo storage (immagini)
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view("admin.projects.create");
+        $project = new Project;
+        $types = Type::all();
+        return view("admin.projects.create", compact("project", "types"));
     }
 
     /**
@@ -44,6 +47,7 @@ class ProjectController extends Controller
         //     "title" => "required|string|max:100",
         //     "text" => "required|string",
         //     "image" => "nullable|image|mimes:jpg,jpeg,png",
+        //     "type_id" => "nullable|exists:types,id",
         // ], 
         // [
         //     "title.required" => "Insert a title.",
@@ -55,6 +59,8 @@ class ProjectController extends Controller
 
         //     "image.image" => "Insert an image.",
         //     "image.mimes" => "Extensions accepted: jpg, jpeg, png."
+
+        //     "type_id.exists" => "Insert type",
         // ]);
 
 
@@ -101,7 +107,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view("admin.projects.edit", compact("project"));
+        $types = Type::all();
+        return view("admin.projects.edit", compact("project", "types"));
     }
 
     /**
@@ -118,6 +125,7 @@ class ProjectController extends Controller
         //     "title" => "required|string|max:100",
         //     "text" => "required|string",
         //     "image" => "nullable|image|mimes:jpg,jpeg,png",
+        //     "type_id" => "nullable|exists:types,id",
         // ], 
         // [
         //     "title.required" => "Insert a title.",
@@ -129,6 +137,7 @@ class ProjectController extends Controller
 
         //     "image.image" => "Insert an image.",
         //     "image.mimes" => "Extensions accepted: jpg, jpeg, png."
+        //     "type_id.exists" => "Insert type",
         // ]);
 
         $data = $request->all();
