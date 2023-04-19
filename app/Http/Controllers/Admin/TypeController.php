@@ -16,7 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = Type::all();
+        $types = Type::paginate(10);
         return view("admin.types.index", compact("types"));
     }
 
@@ -39,7 +39,24 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required|string|max:20",
+            "color" => "required|string|size:7"
+        ], [
+            "name.required" => "Insert a name",
+            "name.string" => "Insert a string",
+            "name.max" => "Name must be shorter than 21 characters",
+
+            "color.required" => "Insert a color",
+            "color.string" => "Insert a string",
+            "color.size" => "Insert a 7-characters color (ex. '#ffffff')",
+        ]);
+
+        $type = new Type();
+        $type->fill($request->all());
+        $type->save();
+
+        return view("admin.types.show");
     }
 
     /**
@@ -50,7 +67,7 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        //
+        return view("admin.types.show", compact("type"));
     }
 
     /**
@@ -61,7 +78,8 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view("admin.types.form", compact("type"));
+        
     }
 
     /**
@@ -73,7 +91,22 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $request->validate([
+            "name" => "required|string|max:20",
+            "color" => "required|string|size:7"
+        ], [
+            "name.required" => "Insert a name",
+            "name.string" => "Insert a string",
+            "name.max" => "Name must be shorter than 21 characters",
+
+            "color.required" => "Insert a color",
+            "color.string" => "Insert a string",
+            "color.size" => "Insert a 7-characters color (ex. '#ffffff')",
+        ]);
+
+        $type->update($request->all());
+
+        return view("admin.types.show");
     }
 
     /**
@@ -84,6 +117,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return view("admin.types.index");
     }
 }

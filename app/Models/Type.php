@@ -9,6 +9,8 @@ class Type extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["name", "color"];
+
     // Relazioni
 
     public function projects() {
