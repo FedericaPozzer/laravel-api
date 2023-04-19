@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-primary text-dark bg-opacity-50">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <h2>laravel-one-to-many</h2>
+            <h2>{{ config('app.name') }}</h2>
             {{-- <div class="logo_laravel">
                 <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 150px">
                     <g clip-path="url(#clip0)" fill="#EF3B2D">
@@ -24,10 +24,10 @@
                     <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.projects.index') }}">{{ __("Projects") }}</a>
+                    <a class="nav-link @if(request()->routeIs("admin.projects*")) active @endif" href="{{route('admin.projects.index') }}">{{ __("Projects") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.types.index') }}">{{ __("Types") }}</a>
+                    <a class="nav-link @if(request()->routeIs("admin.types*")) active @endif" href="{{route('admin.types.index') }}">{{ __("Types") }}</a>
                 </li>
             </ul>
             @endauth
