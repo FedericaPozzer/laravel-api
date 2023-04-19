@@ -32,8 +32,8 @@
 </div>
 
 <div>
-    <p class="badge rounded-pill" 
-    style="background-color:{{$project->type?->color}}">
+    <p class="badge rounded-pill mt-5" 
+    style="background-color:{{$project->type?->color}}"> Type:
     {{$project->type?->name}}</p>
 </div>
 

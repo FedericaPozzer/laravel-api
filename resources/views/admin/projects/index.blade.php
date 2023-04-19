@@ -20,7 +20,16 @@
         <th scope="row">{{$project->id}}</th>
         <td>{{$project->title}}</td>
         <td>{{$project->getAbstract()}}</td>
-        <td>{{$project->type?->name}}</td>
+        <td>
+          {{-- @forelse($project->types as $type)
+            {!! $type->getTypeHTML() !!}
+          @empty no types
+          @endforelse --}} 
+          {{-- NON VA!!! --}}
+
+          <span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">
+            {{$project->type?->name}}</td>
+          </span>
         <td class="d-flex justify-content-between pe-3">
             <a href="{{route("admin.projects.show", $project)}}">
                 <i class="bi bi-eyeglasses" rel="tooltip" title="More details"></i>

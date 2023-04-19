@@ -23,7 +23,8 @@
         <td>{{$type->name}}</td>
         <td>{{$type->color}}</td>
         <td>
-          <span class="badge rounded-pill" style="background-color: {{$type->color}}">{{$type->name}}</span>
+          {!! $type->getTypeHTML() !!}
+          {{-- <span class="badge rounded-pill" style="background-color: {{$type->color}}">{{$type->name}}</span> --}}
         </td>
         <td class="d-flex">
             {{-- <a href="{{route("admin.types.show", $type)}}">
@@ -38,7 +39,11 @@
         </td>
         </tr>
         @empty
-        <p>no types available</p>
+        <tr>
+          <td colspan="5">
+            <p>no types available</p>
+          </td>
+        </tr>
         @endforelse
     </tbody>
 </table> 
