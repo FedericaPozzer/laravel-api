@@ -44,7 +44,7 @@
 
             <div class="my-4">
                 <label for="type_id">Type</label>
-                <select name="type_id" id="type_id" class="form-select mt-2 @error("type_id") is-invalid @enderror">
+                <select name="type_id" id="type_id" class="form-select form-control mt-2 @error("type_id") is-invalid @enderror">
                     <option value="">None</option>
 
                     @foreach($types as $type)
@@ -66,7 +66,7 @@
 
     <div class="col-6 d-flex flex-column">
         <label for="text" class="form-label">Text</label>
-        <textarea class="border @error("text") is-invalid @enderror" name="text" id="text" rows="13"></textarea>
+        <textarea class="form-control @error("text") is-invalid @enderror" name="text" id="text" rows="13"></textarea>
         @error("text")
             <div class="invalid-feedback"> {{ $message }} </div>
         @enderror

@@ -24,12 +24,12 @@ class ProjectSeeder extends Seeder
         $project->title = $faker->catchPhrase(); 
         $project->slug = Str::of($project->title)->slug("-");
         $project->text = $faker->paragraph(3);
-        $project->image = "https://picsum.photos/700/500";
+        // $project->image = "https://picsum.photos/700/500";
 
         $project->save();
         }
     }
 }
 
-// per svuotare la tabella dai seed di prova:
+// per svuotare la tabella dai seed di prova e ri-seeddarla:
 // php artisan migrate:fresh --seed

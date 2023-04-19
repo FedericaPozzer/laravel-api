@@ -16,7 +16,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all();
+        return view("admin.types.index", compact("types"));
     }
 
     /**
@@ -26,7 +27,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $type = new Type();
+        return view("admin.types.form", compact("type"));
     }
 
     /**
