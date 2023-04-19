@@ -42,21 +42,21 @@
             </div> --}}
         </div>
 
-            <div class="my-4">
-                <label for="type_id">Type</label>
-                <select name="type_id" id="type_id" class="form-select form-control mt-2 @error("type_id") is-invalid @enderror">
-                    <option value="">None</option>
+        <div class="my-4">
+            <label for="type_id">Type</label>
+            <select name="type_id" id="type_id" class="form-select form-control mt-2 @error("type_id") is-invalid @enderror">
+                <option value="">None</option>
 
-                    @foreach($types as $type)
-                    <option @if(old("type_id", $project->type_id) == $type->id) selected @endif value="{{$type->id}}">{{$type->name}}</option>
-                    @endforeach
+                @foreach($types as $type)
+                <option @if(old("type_id", $project->type_id) == $type->id) selected @endif value="{{$type->id}}">{{$type->name}}</option>
+                @endforeach
 
-                    @error("type_id")
-                    <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
+                @error("type_id")
+                <div class="invalid-feedback"> {{ $message }} </div>
+                @enderror
 
-                </select>
-            </div>
+            </select>
+        </div>
 
         <div class="mt-auto">
             <button type="submit" class="btn btn-outline-primary">Save this new project</button>
