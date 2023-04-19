@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Project;
+use App\Models\Type;
+
 use Illuminate\Support\Str; //per lo slug
 use Faker\Generator as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,9 +20,11 @@ class ProjectSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $types = Type::all()->pluck("id"); // genero array con tutti gli ID del TYPES disponibili
+
         for($i=0; $i < 30; $i++) {
         $project = new Project;
-
+        $project->type_id = $faker->randomElement($types);
         $project->title = $faker->catchPhrase(); 
         $project->slug = Str::of($project->title)->slug("-");
         $project->text = $faker->paragraph(3);
