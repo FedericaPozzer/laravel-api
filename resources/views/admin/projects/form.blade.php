@@ -25,7 +25,7 @@
     <div class="col-6 d-flex flex-column">
         <div>
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control @error("title") is-invalid @enderror" id="title" name="title" value="{{ old("title") }}">
+            <input type="text" class="form-control @error("title") is-invalid @enderror" id="title" name="title" value="{{ old("title") ?? $project->title }}">
             @error("title")
             <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
@@ -38,7 +38,7 @@
             <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
             {{-- <div>
-                <img src="{{$project->getIamge()}}" alt="">
+                <img src="{{old("image", $project->image)}}" class="img-fluid" alt="">
             </div> --}}
         </div>
 
@@ -66,7 +66,7 @@
 
     <div class="col-6 d-flex flex-column">
         <label for="text" class="form-label">Text</label>
-        <textarea class="form-control @error("text") is-invalid @enderror" name="text" id="text" rows="13"></textarea>
+        <textarea class="form-control @error("text") is-invalid @enderror" name="text" id="text" rows="13">{{ old("text") ?? $project->text }}</textarea>
         @error("text")
             <div class="invalid-feedback"> {{ $message }} </div>
         @enderror
