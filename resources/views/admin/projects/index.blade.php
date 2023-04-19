@@ -11,7 +11,7 @@
         <th scope="col">Title</th>
         <th scope="col">Abstract</th>
         <th scope="col">Type</th>
-        <th scope="col">Details</th>
+        <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
