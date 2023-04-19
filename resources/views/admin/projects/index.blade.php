@@ -30,9 +30,6 @@
                 <i class="bi bi-pencil" rel="tooltip" title="Edit"></i>
             </a>
 
-            {{-- <a href="{{route("admin.projects.destroy", $project)}}">
-                <i class="bi bi-trash" rel="tooltip" title="Kill TODO"></i>
-            </a> --}}
             <button class="bi bi-trash" rel="tooltip" title="Kill" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$project->id}}"></button>
         </td>
         </tr>

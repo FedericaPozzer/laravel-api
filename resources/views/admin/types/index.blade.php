@@ -10,6 +10,7 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Color</th>
+        <th scope="col">Pill</th>
         <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -19,10 +20,13 @@
         <th scope="row">{{$type->id}}</th>
         <td>{{$type->name}}</td>
         <td>{{$type->color}}</td>
+        <td>
+          <span class="badge rounded-pill" style="background-color: {{$type->color}}">{{$type->name}}</span>
+        </td>
         <td class="d-flex justify-content-between pe-3">
-            <a href="{{route("admin.types.show", $type)}}">
+            {{-- <a href="{{route("admin.types.show", $type)}}">
                 <i class="bi bi-eyeglasses" rel="tooltip" title="More details"></i>
-            </a>
+            </a> --}}
 
             <a href="{{route("admin.types.edit", $type)}}">
                 <i class="bi bi-pencil" rel="tooltip" title="Edit"></i>

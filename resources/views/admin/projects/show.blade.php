@@ -3,7 +3,7 @@
 @section("content")
 
 <div class="row my-5">
-    <div class="col-10">
+    <div class="col-8">
         <h2>{{$project->title}}</h2>
         {{-- @dump($project->type?->color) YESSS --}}
     </div>
@@ -12,6 +12,16 @@
             <a href="{{route('admin.projects.index')}}" class="text-dark"> Back to the list! </a>
         </button>
     </div>
+    {{-- <div class="col-1">
+        <button type="button" class="btn btn-outline-secondary">
+            <a href="{{route('admin.projects.index')}}" class="text-dark"> Edit </a>
+        </button>
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-outline-secondary">
+            <a href="{{route('admin.projects.index')}}" class="text-dark"> Delete </a>
+        </button>
+    </div> --}}
 </div>
 
 <div class="row">

@@ -33,7 +33,7 @@ Route::middleware("auth")
             ->parameters(["projects" => "project:slug"]);
 
           // Risorse types
-        Route::resource("types", TypeController::class);
+        Route::resource("types", TypeController::class)->except("show");
     });
 
 Route::middleware('auth')
