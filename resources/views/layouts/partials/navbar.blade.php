@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('admin.projects.index') }}">{{ __("Projects") }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.types.index') }}">{{ __("Types") }}</a>
+                </li>
             </ul>
             @endauth
 

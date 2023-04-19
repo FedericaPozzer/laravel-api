@@ -4,6 +4,8 @@
 
 <h1 class="my-5">Types</h1>
 
+{{-- @dump($type) --}}
+
 <table class="table table-primary table-striped">
     <thead>
         <tr>
@@ -23,13 +25,13 @@
         <td>
           <span class="badge rounded-pill" style="background-color: {{$type->color}}">{{$type->name}}</span>
         </td>
-        <td class="d-flex justify-content-between pe-3">
+        <td class="d-flex">
             {{-- <a href="{{route("admin.types.show", $type)}}">
                 <i class="bi bi-eyeglasses" rel="tooltip" title="More details"></i>
             </a> --}}
 
             <a href="{{route("admin.types.edit", $type)}}">
-                <i class="bi bi-pencil" rel="tooltip" title="Edit"></i>
+                <i class="bi bi-pencil me-4" rel="tooltip" title="Edit"></i>
             </a>
 
             <button class="bi bi-trash" rel="tooltip" title="Kill" data-bs-toggle="modal" data-bs-target="#delete-modal-{{$type->id}}"></button>

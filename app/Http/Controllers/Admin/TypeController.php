@@ -56,7 +56,8 @@ class TypeController extends Controller
         $type->fill($request->all());
         $type->save();
 
-        return view("admin.types.show");
+        $types = Type::paginate(10);
+        return view("admin.types.index", compact("types"));
     }
 
     /**
@@ -79,7 +80,6 @@ class TypeController extends Controller
     public function edit(Type $type)
     {
         return view("admin.types.form", compact("type"));
-        
     }
 
     /**
@@ -106,7 +106,8 @@ class TypeController extends Controller
 
         $type->update($request->all());
 
-        return view("admin.types.show");
+        $types = Type::paginate(10);
+        return view("admin.types.index", compact("types"));
     }
 
     /**
@@ -118,6 +119,8 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         $type->delete();
-        return view("admin.types.index");
+        
+        $types = Type::paginate(10);
+        return view("admin.types.index", compact("types"));
     }
 }
