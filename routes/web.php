@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ Route::middleware("auth")
     ->group(function() {
         Route::resource("projects", ProjectController::class)
             ->parameters(["projects" => "project:slug"]);
+
+          // Risorse types
+        Route::resource("types", TypeController::class);
     });
 
 Route::middleware('auth')
@@ -39,7 +43,7 @@ Route::middleware('auth')
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
-    }
-);
+});
+
 
 require __DIR__.'/auth.php';

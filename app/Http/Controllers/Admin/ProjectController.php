@@ -116,25 +116,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        // $request->validate(
-        // [
-        //     "title" => "required|string|max:100",
-        //     "text" => "required|string",
-        //     "image" => "nullable|image|mimes:jpg,jpeg,png",
-        //     "type_id" => "nullable|exists:types,id",
-        // ], 
-        // [
-        //     "title.required" => "Insert a title.",
-        //     "title.string" => "The title must be a string.",
-        //     "title.max" => "The title must be shorter than 100 characters.",
+        $request->validate(
+        [
+            "title" => "required|string|max:100",
+            "text" => "required|string",
+            "image" => "nullable|image|mimes:jpg,jpeg,png",
+            "type_id" => "nullable|exists:types,id",
+        ], 
+        [
+            "title.required" => "Insert a title.",
+            "title.string" => "The title must be a string.",
+            "title.max" => "The title must be shorter than 100 characters.",
 
-        //     "text.required" => "Insert the text.",
-        //     "text.string" => "The text must be a string!",
+            "text.required" => "Insert the text.",
+            "text.string" => "The text must be a string!",
 
-        //     "image.image" => "Insert an image.",
-        //     "image.mimes" => "Extensions accepted: jpg, jpeg, png.",
-        //     "type_id.exists" => "Insert type",
-        // ]);
+            "image.image" => "Insert an image.",
+            "image.mimes" => "Extensions accepted: jpg, jpeg, png.",
+
+            "type_id.exists" => "Insert type",
+        ]);
 
         $data = $request->all();
 
