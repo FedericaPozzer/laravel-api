@@ -39,6 +39,14 @@
     {{$project->type?->name}}</p>
 </div>
 
+<div>
+    @foreach($project->technologies as $technology)
+    <span class="badge" style="background-color: {{$technology->color}}"> Tech: 
+    {{$technology->name}}
+    </span>
+    @endforeach
+</div>
+
 @endsection
 
 

@@ -20,8 +20,9 @@
             <!-- Left Side Of Navbar -->
             @auth
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                <li class="nav-item"> 
+                    <a class="nav-link @if(request()->path() == "/") active @endif" href="{{url('/') }}">{{ __('Home') }}</a>
+                    {{-- request()->path() == "/" perchè con l'url non ho IS e quindi faccio in un altro modo.. confronto fra stringhe --}}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->routeIs("admin.projects*")) active @endif" href="{{route('admin.projects.index') }}">{{ __("Projects") }}</a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr; //per lo storage (immagini)
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,8 @@ class ProjectController extends Controller
     {
         $project = new Project;
         $types = Type::all();
-        return view("admin.projects.form", compact("project", "types"));
+        $technologies = Technology::all();
+        return view("admin.projects.form", compact("project", "types", "technologies"));
     }
 
     /**
@@ -104,7 +106,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view("admin.projects.form", compact("project", "types"));
+        $technologies = Technology::all();
+        $project_technologies = $project->technologies->pluck("id")->toArray();
+        return view("admin.projects.form", compact("project", "types", "technologies", "project_technologies"));
     }
 
     /**
@@ -148,6 +152,9 @@ class ProjectController extends Controller
         $project->fill($data);
         $project->slug = Project::generateSlug($project->title);
         $project->save();
+        
+        if(Arr::exists($data, "technologies")) $project->technologies()->synch($data["technologies"]);
+        else $project->technologies()->detach();
 
         return to_route("admin.projects.show", $project);
     }

@@ -21,6 +21,7 @@ class ProjectSeeder extends Seeder
     public function run(Faker $faker)
     {
         $types = Type::all()->pluck("id")->toArray(); // genero array con tutti gli ID del TYPES disponibili (aggiungo toArray perchè se no mi arriva una collection)
+        // $types[] = null; --questo serve se voglio aggiungere all'array anche un "null" in modo che non sia sempre A, B o C!
 
         for($i=0; $i < 30; $i++) {
         $project = new Project;

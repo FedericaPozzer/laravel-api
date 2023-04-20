@@ -58,6 +58,16 @@
             </select>
         </div>
 
+        <div class="mb-5 mt-3">
+            <label for="" class="form-label">Technologies</label>
+            @foreach($technologies as $technology)
+            <div>
+                <input type="checkbox" id="tech-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, $project_technologies)) checked @endif>
+                <label for="tech-{{$technology->id}}">{{$technology->name}}</label>
+            </div>
+            @endforeach
+        </div>
+
         <div class="mt-auto">
             <button type="submit" class="btn btn-outline-primary">Save this new project</button>
         </div>

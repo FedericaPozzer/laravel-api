@@ -10,6 +10,7 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Abstract</th>
+        <th scope="col">Tech</th>
         <th scope="col">Type</th>
         <th scope="col">Actions</th>
         </tr>
@@ -20,6 +21,14 @@
         <th scope="row">{{$project->id}}</th>
         <td>{{$project->title}}</td>
         <td>{{$project->getAbstract()}}</td>
+         <td>
+          @forelse($project->technologies as $technology)
+          <span class="badge" style="background-color: {{$technology->color}}">
+          {{$technology->name}}
+          </span>
+          @empty -
+          @endforelse
+        </td>
         <td>
           {{-- @forelse($project->types as $type)
             {!! $type->getTypeHTML() !!}
@@ -28,8 +37,9 @@
           {{-- NON VA!!! --}}
 
           <span class="badge rounded-pill" style="background-color: {{$project->type?->color}}">
-            {{$project->type?->name}}</td>
+            {{$project->type?->name}}
           </span>
+        </td>
         <td class="d-flex justify-content-between pe-3">
             <a href="{{route("admin.projects.show", $project)}}">
                 <i class="bi bi-eyeglasses" rel="tooltip" title="More details"></i>
