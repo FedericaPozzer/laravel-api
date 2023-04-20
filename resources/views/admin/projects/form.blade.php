@@ -4,6 +4,7 @@
 
 @section("content")
 
+{{-- * TITLE --}}
 <div>
 @if($project->id)
 <h2 class="my-5">Update this project!</h2>
@@ -14,6 +15,7 @@
 
 @include("layouts.partials.errors")
 
+{{-- * IS IT EDIT OR CREATE? --}}
 @if($project->id)
     <form action="{{ route("admin.projects.update", $project) }}" method="POST" class="row" enctype="multipart/form-data">
     @method("PUT")
@@ -23,6 +25,8 @@
     @csrf
 
     <div class="col-6 d-flex flex-column">
+
+        {{-- * PROJECT TITLE --}}
         <div>
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control @error("title") is-invalid @enderror" id="title" name="title" value="{{ old("title") ?? $project->title }}">
@@ -31,6 +35,7 @@
             @enderror
         </div>
 
+        {{-- * PROJECT IMAGE --}}
         <div class="my-3">
             <label for="image" class="form-label">Image</label>
             <input type="file" class="form-control @error("image") is-invalid @enderror" id="image" name="image">
@@ -42,6 +47,7 @@
             </div> --}}
         </div>
 
+        {{-- * PROJECT TYPES --}}
         <div class="my-4">
             <label for="type_id">Type</label>
             <select name="type_id" id="type_id" class="form-select form-control mt-2 @error("type_id") is-invalid @enderror">
@@ -54,41 +60,44 @@
                 @error("type_id")
                 <div class="invalid-feedback"> {{ $message }} </div>
                 @enderror
-
             </select>
         </div>
 
+        {{-- * PROJECT TECHNOLOGIES --}}
         <div class="mb-5 mt-3">
             <label for="" class="form-label">Technologies</label>
             <div class="form-check @error("technologies") is-invalid @enderror">
 
             @foreach($technologies as $technology)
-
                 <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, old("technologies", $project_technogies ?? []))) checked @endif>
                 <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
                 <br>
-
             @endforeach
 
-            <input type="checkbox" id="technology-10" value="10" name="technologies[]" class="form-check-control">
-            <label for="technology-10">GimmeError</label>
-
+            {{-- Input di prova per testare il vlaidator - OK --}}
+            {{-- <input type="checkbox" id="technology-10" value="10" name="technologies[]" class="form-check-control">
+            <label for="technology-10">GimmeError</label> --}}
             </div>
 
             @error("technologies")
                 <div class="invalid-feedback"> {{ $message }} </div>
             @enderror
-            
         </div>
 
+        {{-- * SAVE BTN (Edit/Create versions) --}}
         <div class="mt-auto">
-            <button type="submit" class="btn btn-outline-primary">Save this new project</button>
+            @if($project->id)
+                <button type="submit" class="btn btn-outline-primary">Update this project</button>
+            @else
+                <button type="submit" class="btn btn-outline-primary">Save this new project</button>
+            @endif 
         </div>
 
     </div>
 
+    {{-- * PROJECT DESCRIPTION --}}
     <div class="col-6 d-flex flex-column">
-        <label for="text" class="form-label">Text</label>
+        <label for="text" class="form-label">Description</label>
         <textarea class="form-control @error("text") is-invalid @enderror" name="text" id="text" rows="13">{{ old("text") ?? $project->text }}</textarea>
         @error("text")
             <div class="invalid-feedback"> {{ $message }} </div>
@@ -97,6 +106,7 @@
     
 </form>
 
+{{-- * GO BACK BTN --}}
 <button type="button" class="btn btn-outline-secondary mt-5">
     <a href="{{route('admin.projects.index')}}" class="text-dark"> Back to the list! </a>
 </button>

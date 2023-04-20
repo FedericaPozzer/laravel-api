@@ -8,6 +8,7 @@
         {{-- @dump($project->type?->color) YESSS --}}
     </div>
 
+    {{-- * ACTIONS --}}
     <div class="col-3">
         <button type="button" class="btn btn-outline-secondary">
             <a href="{{route('admin.projects.index')}}" class="text-dark"> Back to the list! </a>
@@ -22,23 +23,29 @@
 
 </div>
 
-<div class="row">
+<div class="row mb-5">
+    {{-- * IMG --}}
     <div class="col-8">
-      <div class="show-img-container">
-        <img src=" {{ $project->getImage() }} " alt="img">
-      </div>
+        <div class="show-img-container">
+            <img src=" {{ $project->getImage() }} " alt="img">
+        </div>
     </div>
+    {{-- * TEXTAREA --}}
     <div class="col-4">
         <p>{{$project->text}}</p>
     </div>
 </div>
 
-<div>
-    <p class="badge rounded-pill mt-5" 
-    style="background-color:{{$project->type?->color}}"> Type:
-    {{$project->type?->name}}</p>
+{{-- * TYPE --}}
+<div> {{-- aggiungo l'IF perchè se cancello il type mi rimane "Type:" volante e lo odio --}}
+    @if($project->type)
+    <p class="badge rounded-pill" 
+        style="background-color:{{$project->type?->color}}"> Type:
+        {{$project->type?->name}}</p>
+    @endif
 </div>
 
+{{-- * TECHNOLOGIES --}}
 <div>
     @foreach($project->technologies as $technology)
     <span class="badge" style="background-color: {{$technology->color}}"> Tech: 
@@ -50,27 +57,9 @@
 @endsection
 
 
-
+{{-- * MODAL FOR DELETE --}}
 @section("modals")
-<div class="modal fade" id="delete-modal-{{$project->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you wanna delete {{$project->title}}? <br> This operation is not reversible!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
-        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
-            @method("delete")
-            @csrf
-            <button type="submit" class="btn btn-primary">Yes, delete!</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
+@include("layouts.partials.modalProject")
+
 @endsection

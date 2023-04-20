@@ -4,6 +4,7 @@
 
 @section("content")
 
+{{-- * TITLE --}}
 <div>
 @if($type->id)
 <h2 class="my-5">Update this type!</h2>
@@ -14,6 +15,7 @@
 
 @include("layouts.partials.errors")
 
+{{-- * IS IT EDIT OR CREATE? --}}
 @if($type->id)
     <form action="{{ route("admin.types.update", $type) }}" method="POST" class="row" enctype="multipart/form-data">
     @method("PUT")
@@ -23,6 +25,7 @@
     @csrf
 
     <div class="col-6 d-flex flex-column">
+        {{-- * TYPE NAME --}}
         <div>
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control @error("name") is-invalid @enderror" id="name" name="name" value="{{ old("name") ?? $type->name }}">
@@ -31,6 +34,7 @@
             @enderror
         </div>
 
+        {{-- * TYPE COLOR --}}
         <div class="my-5">
             <label for="color" class="form-label">Color</label>
             <input type="text" class="form-control @error("color") is-invalid @enderror" id="color" name="color" value="{{ old("color") ?? $type->color }}">
@@ -39,14 +43,20 @@
             @enderror
         </div>
 
+        {{-- * SAVE BTN (Edit/Create versions) --}}
         <div class="mt-auto">
-            <button type="submit" class="btn btn-outline-primary">Save this new type</button>
+            @if($type->id)
+                <button type="submit" class="btn btn-outline-primary">Update this type</button>
+            @else
+                <button type="submit" class="btn btn-outline-primary">Save this new type</button>
+            @endif 
         </div>
 
     </div>
     
 </form>
 
+{{-- * GO BACK BTN --}}
 <button type="button" class="btn btn-outline-secondary mt-5">
     <a href="{{route('admin.types.index')}}" class="text-dark"> Back to the list! </a>
 </button>

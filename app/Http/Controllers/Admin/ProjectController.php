@@ -86,6 +86,9 @@ class ProjectController extends Controller
 
         // dd($data);
 
+        if(Arr::exists($data, "technologies")) $project->technologies()->sync($data["technologies"]);
+        // come nell'update ma senza il detach, che non serve perchè essendo un project nuovo non ho roba vecchia da detachare
+
         return to_route("admin.projects.show", $project);
        
     }
@@ -160,7 +163,7 @@ class ProjectController extends Controller
         $project->slug = Project::generateSlug($project->title);
         $project->save();
         
-        if(Arr::exists($data, "technologies")) $project->technologies()->synch($data["technologies"]);
+        if(Arr::exists($data, "technologies")) $project->technologies()->sync($data["technologies"]);
         else $project->technologies()->detach();
 
         return to_route("admin.projects.show", $project);
