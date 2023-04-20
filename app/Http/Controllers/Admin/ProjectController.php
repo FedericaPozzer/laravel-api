@@ -33,7 +33,8 @@ class ProjectController extends Controller
         $project = new Project;
         $types = Type::all();
         $technologies = Technology::all();
-        return view("admin.projects.form", compact("project", "types", "technologies"));
+        $project_technologies = [];
+        return view("admin.projects.form", compact("project", "types", "technologies", "project_technologies"));
     }
 
     /**
@@ -50,6 +51,7 @@ class ProjectController extends Controller
             "text" => "required|string",
             "image" => "nullable|image|mimes:jpg,jpeg,png",
             "type_id" => "nullable|exists:types,id",
+            "technologies" => "nullable|exists:technologies,id" //al plurale perchè è un array
         ], 
         [
             "title.required" => "Insert a title.",
@@ -63,6 +65,8 @@ class ProjectController extends Controller
             "image.mimes" => "Extensions accepted: jpg, jpeg, png.",
 
             "type_id.exists" => "Insert type",
+
+            "technologies.exists" => "Technology not valid",
         ]);
 
 
@@ -126,6 +130,7 @@ class ProjectController extends Controller
             "text" => "required|string",
             "image" => "nullable|image|mimes:jpg,jpeg,png",
             "type_id" => "nullable|exists:types,id",
+            "technologies" => "nullable|exists:technologies,id" //al plurale perchè è un array
         ], 
         [
             "title.required" => "Insert a title.",
@@ -139,6 +144,8 @@ class ProjectController extends Controller
             "image.mimes" => "Extensions accepted: jpg, jpeg, png.",
 
             "type_id.exists" => "Insert type",
+
+            "technologies.exists" => "Technology not valid",
         ]);
 
         $data = $request->all();

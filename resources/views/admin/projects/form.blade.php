@@ -60,12 +60,25 @@
 
         <div class="mb-5 mt-3">
             <label for="" class="form-label">Technologies</label>
+            <div class="form-check @error("technologies") is-invalid @enderror">
+
             @foreach($technologies as $technology)
-            <div>
-                <input type="checkbox" id="tech-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, $project_technologies)) checked @endif>
-                <label for="tech-{{$technology->id}}">{{$technology->name}}</label>
-            </div>
+
+                <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, old("technologies", $project_technogies ?? []))) checked @endif>
+                <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                <br>
+
             @endforeach
+
+            <input type="checkbox" id="tag-10" value="10" name="tags[]" class="form-check-control">
+            <label for="tag-10">GimmeError</label>
+
+            </div>
+
+            @error("technologies")
+                <div class="invalid-feedback"> {{ $message }} </div>
+            @enderror
+            
         </div>
 
         <div class="mt-auto">
