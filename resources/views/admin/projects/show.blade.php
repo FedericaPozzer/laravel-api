@@ -24,7 +24,9 @@
 
 <div class="row">
     <div class="col-8">
+      <div class="show-img-container">
         <img src=" {{ $project->getImage() }} " alt="img">
+      </div>
     </div>
     <div class="col-4">
         <p>{{$project->text}}</p>
