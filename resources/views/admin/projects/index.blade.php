@@ -43,7 +43,11 @@
         </td>
         </tr>
         @empty
-        <p>no projects available</p>
+        <tr>
+          <td colspan="5">
+            <p>No projects available!</p>
+          </td>
+        </tr>
         @endforelse
     </tbody>
 </table> 
