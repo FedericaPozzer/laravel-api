@@ -70,8 +70,8 @@
 
             @endforeach
 
-            <input type="checkbox" id="tag-10" value="10" name="tags[]" class="form-check-control">
-            <label for="tag-10">GimmeError</label>
+            <input type="checkbox" id="technology-10" value="10" name="technologies[]" class="form-check-control">
+            <label for="technology-10">GimmeError</label>
 
             </div>
 
