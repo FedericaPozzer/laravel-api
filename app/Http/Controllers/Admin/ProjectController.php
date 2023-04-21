@@ -127,13 +127,14 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $request->validate(
+        $request->validate( 
         [
             "title" => "required|string|max:100",
             "text" => "required|string",
             "image" => "nullable|image|mimes:jpg,jpeg,png",
             "type_id" => "nullable|exists:types,id",
-            "technologies" => "nullable|exists:technologies,id" //al plurale perchè è un array
+            "technologies" => "nullable|exists:technologies,id", //al plurale perchè è un array
+            "is_published" => "boolean",
         ], 
         [
             "title.required" => "Insert a title.",
@@ -149,22 +150,29 @@ class ProjectController extends Controller
             "type_id.exists" => "Insert type",
 
             "technologies.exists" => "Technology not valid",
+
+            "is_published.boolean" => "Only 1 and 0 accepted",
         ]);
 
         $data = $request->all();
+        $data["slug"] = Project::generateSlug($data["title"]);
+            
+            // se la richiesta contiene is_published metti 1 (true), altrimenti 0 (false) 
+            // Questa opearazione serve perchè quando pubblico risulta is_published ma quando tolgo la pubblicazione rimane pubblicato perchè non esiste il "not published" e quindi non passa nessuna info e quindi rimane invariato (ovvero published, we don't want that).
+        $data["is_published"] = $request->has("is_published") ? 1 : 0;
+        
 
         if(Arr::exists($data, "image")) {
             if($project->image) Storage::delete($project->image);
             $path = Storage::put("uploads/projects", $data["image"]);
             $data["image"] = $path;
-        };
+        };        
 
-        $project->fill($data);
-        $project->slug = Project::generateSlug($project->title);
-        $project->save();
+        $project->update($data);
         
         if(Arr::exists($data, "technologies")) $project->technologies()->sync($data["technologies"]);
         else $project->technologies()->detach();
+
 
         return to_route("admin.projects.show", $project);
     }

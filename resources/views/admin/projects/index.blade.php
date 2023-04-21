@@ -19,7 +19,12 @@
     <tbody>
     @forelse($projects as $project)
     	<tr>
+        @if(($project->is_published) == 1)
+        <th scope="row" class="text-primary">{{$project->id}}</th>
+        @else
     	<th scope="row">{{$project->id}}</th>
+        @endif
+
     	<td>{{$project->title}}</td>
 
 		{{-- * DESCRIPTION ABSTRACT (Project Model) --}}

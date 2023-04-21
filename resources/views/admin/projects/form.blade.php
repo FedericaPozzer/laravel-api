@@ -64,24 +64,31 @@
         </div>
 
         {{-- * PROJECT TECHNOLOGIES --}}
-        <div class="mb-5 mt-3">
-            <label for="" class="form-label">Technologies</label>
-            <div class="form-check @error("technologies") is-invalid @enderror">
+        <div class="mb-5 mt-3 row">
+            <div class="col-7">
+                <label for="" class="form-label">Technologies</label>
+                <div class="form-check @error("technologies") is-invalid @enderror">
 
-            @foreach($technologies as $technology)
-                <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, old("technologies", $project_technogies ?? []))) checked @endif>
-                <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
-                <br>
-            @endforeach
+                @foreach($technologies as $technology)
+                    <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, old("technologies", $project_technogies ?? []))) checked @endif>
+                    <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
+                    <br>
+                @endforeach
 
-            {{-- Input di prova per testare il vlaidator - OK --}}
-            {{-- <input type="checkbox" id="technology-10" value="10" name="technologies[]" class="form-check-control">
-            <label for="technology-10">GimmeError</label> --}}
+                {{-- Input di prova per testare il vlaidator - OK --}}
+                {{-- <input type="checkbox" id="technology-10" value="10" name="technologies[]" class="form-check-control">
+                <label for="technology-10">GimmeError</label> --}}
+                </div>
+
+                @error("technologies")
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                @enderror
             </div>
 
-            @error("technologies")
-                <div class="invalid-feedback"> {{ $message }} </div>
-            @enderror
+            <div class="col-5">
+                <label for="is_published" class="form-label">Check here to publish this project</label>
+                <input type="checkbox" name="is_published" id="is_published" class="form-check-control @error("is_published") is-invalid @enderror" @checked(old("is_published", $project->is_published)) value="1">
+            </div>
         </div>
 
         {{-- * SAVE BTN (Edit/Create versions) --}}

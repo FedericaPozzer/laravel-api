@@ -54,6 +54,17 @@
     @endforeach
 </div>
 
+{{-- * IS PUBLISHED? --}}
+<div class="text-center"> 
+    @if(($project->is_published) == 1)
+    <p class="h3">
+        &hearts;
+        This project is currently published!
+        &hearts;
+    </p>
+    @endif
+</div>
+
 @endsection
 
 
