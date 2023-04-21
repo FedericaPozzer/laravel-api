@@ -75,10 +75,16 @@
 {{-- * pagination --}}
 {{$projects->links()}}
 
+<div class="d-flex justify-content-end">
+{{-- * ADD PROJECT BTN --}}
+    <div class="">
+     <a href="{{ route('admin.projects.create') }}" type="button" class="btn btn-outline-primary">+ add new project</a>
+    </div>
 
 {{-- * ADD PROJECT BTN --}}
-<div class="my-3 d-flex w-100 justify-content-end">
-    <a href="{{ route('admin.projects.create') }}" type="button" class="btn btn-outline-primary">+ add new project</a>
+    <div class="ms-3">
+        <a href="{{ route('admin.projects.trash') }}" type="button" class="btn btn-outline-primary"><span class="bi bi-trash3"></span> trashed projects</a>
+    </div>
 </div>
 
 @endsection

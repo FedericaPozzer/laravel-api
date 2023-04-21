@@ -179,9 +179,54 @@ class ProjectController extends Controller
     {
         $id_project = $project->id;
 
-        if($project->image) Storage::delete($project->image);
+        // if($project->image) Storage::delete($project->image);
         $project->delete();
 
         return redirect()->route("admin.projects.index");
     }
+
+    /** SOFT DELETE
+     * Display a listing of the trashed resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function trash()
+    {
+        $projects = Project::onlyTrashed()->get();
+        // dd($projects); ok
+        return view("admin.projects.trash", compact("projects"));
+    }
+
+    /** RESTORE
+     * Display a listing of the trashed resource.
+     *
+     * @param  \App\Models\Project $project
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Int $id) {
+        $project = Project::where("id", $id)->onlyTrashed()->first();
+        $project->restore();
+
+        return to_route("admin.projects.index");
+    }
+
+    /** FORCE DELETE
+     * Display a listing of the trashed resource.
+     *
+     * @param  \App\Models\Project $project
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete(Int $id) 
+    {
+        $project = Project::where("id", $id)->onlyTrashed()->first();
+
+        $id_project = $project->id;
+
+        if($project->image) Storage::delete($project->image);
+        $project->forceDelete();
+
+        return to_route("admin.projects.trash");
+    }
+
 }

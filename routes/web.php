@@ -29,10 +29,15 @@ Route::middleware("auth")
     ->prefix("/admin")
     ->name("admin.")
     ->group(function() {
+            // Soft Delete
+        Route::get("projects/trash", [ProjectController::class, "trash"])->name("projects.trash");
+        Route::put("projects/{project}/restore", [ProjectController::class, "restore"])->name("projects.restore");
+        Route::delete("projects/{project}/force-delete", [ProjectController::class, "forceDelete"])->name("projects.force-delete");
+
         Route::resource("projects", ProjectController::class)
             ->parameters(["projects" => "project:slug"]);
 
-          // Risorse types
+            // Risorse types
         Route::resource("types", TypeController::class)->except("show");
     });
 

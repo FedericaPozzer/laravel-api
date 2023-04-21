@@ -95,8 +95,6 @@
         </div>
     </div>
 </div>
-{{-- @include("layouts.partials.modal") --}}
-
 
 @endforeach
 @endsection

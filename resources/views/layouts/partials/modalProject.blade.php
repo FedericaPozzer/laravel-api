@@ -7,7 +7,7 @@
             </div>
             
             <div class="modal-body">
-                Are you sure you wanna delete {{$project->title}}? <br> This operation is not reversible!
+                Are you sure you wanna delete {{$project->title}}? <br> This operation is reversible!
             </div>
       
             <div class="modal-footer">
