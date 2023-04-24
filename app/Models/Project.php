@@ -13,6 +13,8 @@ class Project extends Model
 
     protected $fillable = ["title", "text", "image", "type_id", "is_published"];
 
+    // protected $with = ["type", "technologies"]; //eager loading
+ 
     public function getAbstract($max = 50) {
         return substr($this->text, 0, $max) . "..";
     }
