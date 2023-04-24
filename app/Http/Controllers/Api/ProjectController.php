@@ -15,8 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::select("type_id", "title", "id")
-        ->where("is_published", true)->with("type", "technologies")->get();
+        $projects = Project::where("is_published", true)->with("type", "technologies")->get();
         return response()->json($projects);
     }
 
