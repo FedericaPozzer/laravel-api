@@ -16,6 +16,12 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::where("is_published", true)->with("type", "technologies")->get();
+
+        // invio solo 50 caratteri al frontend (per la show decido dopo..NELLA SHOW!)
+        foreach($projects as $project) {
+            $project->text = $project->getAbstract(50);
+        }
+
         return response()->json($projects);
     }
 
