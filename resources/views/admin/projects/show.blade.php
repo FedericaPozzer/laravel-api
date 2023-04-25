@@ -45,25 +45,32 @@
     @endif
 </div>
 
-{{-- * TECHNOLOGIES --}}
-<div>
-    @foreach($project->technologies as $technology)
-    <span class="badge" style="background-color: {{$technology->color}}"> Tech: 
-    {{$technology->name}}
-    </span>
-    @endforeach
+<div class="d-flex justify-content-between">
+
+    {{-- * TECHNOLOGIES --}}
+    <div>
+        @foreach($project->technologies as $technology)
+        <span class="badge" style="background-color: {{$technology->color}}"> Tech: 
+        {{$technology->name}}
+        </span>
+        @endforeach
+    </div>
+
+    {{-- * IS PUBLISHED? --}}
+    <div class="text-center"> 
+        @if(($project->is_published) == 1)
+        <p class="h3">
+            &hearts;
+            This project is currently published!
+            &hearts;
+        </p>
+        @endif
+    </div>
+
 </div>
 
-{{-- * IS PUBLISHED? --}}
-<div class="text-center"> 
-    @if(($project->is_published) == 1)
-    <p class="h3">
-        &hearts;
-        This project is currently published!
-        &hearts;
-    </p>
-    @endif
-</div>
+
+
 
 @endsection
 

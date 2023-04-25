@@ -70,7 +70,7 @@
                 <div class="form-check @error("technologies") is-invalid @enderror">
 
                 @foreach($technologies as $technology)
-                    <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, old("technologies", $project_technogies ?? []))) checked @endif>
+                    <input type="checkbox" id="technology-{{$technology->id}}" value="{{$technology->id}}" class="form-check-control" name="technologies[]" @if(in_array($technology->id, old("technologies", $project_technologies ?? []))) checked @endif>
                     <label for="technology-{{$technology->id}}">{{$technology->name}}</label>
                     <br>
                 @endforeach
@@ -84,7 +84,7 @@
                     <div class="invalid-feedback"> {{ $message }} </div>
                 @enderror
             </div>
-
+        {{-- * PUBLISH/UNPUBLISH THE PROJECT --}}
             <div class="col-5">
                 <label for="is_published" class="form-label">Check here to publish this project</label>
                 <input type="checkbox" name="is_published" id="is_published" class="form-check-control @error("is_published") is-invalid @enderror" @checked(old("is_published", $project->is_published)) value="1">

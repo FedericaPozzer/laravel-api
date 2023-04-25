@@ -19,7 +19,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(10);
+        $projects = Project::orderBy("updated_at", "DESC")->paginate(10);
         return view("admin.projects.index", compact("projects"));
     }
 
@@ -86,7 +86,7 @@ class ProjectController extends Controller
 
         // dd($data);
 
-        if(Arr::exists($data, "technologies")) $project->technologies()->sync($data["technologies"]);
+        if(Arr::exists($data, "technologies")) $project->technologies()->attach($data["technologies"]);
         // come nell'update ma senza il detach, che non serve perchè essendo un project nuovo non ho roba vecchia da detachare
 
         return to_route("admin.projects.show", $project);
@@ -232,7 +232,10 @@ class ProjectController extends Controller
         $id_project = $project->id;
 
         if($project->image) Storage::delete($project->image);
+
+        $project->technologies()->detach();
         $project->forceDelete();
+
 
         return to_route("admin.projects.trash");
     }
