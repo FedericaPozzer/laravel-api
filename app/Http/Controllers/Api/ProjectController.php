@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::where("is_published", true)->with("type", "technologies")->get();
+        $projects = Project::where("is_published", true)->with("type", "technologies")->paginate(12);
 
         // invio solo 50 caratteri al frontend (per la show decido dopo..NELLA SHOW!)
         foreach($projects as $project) {
