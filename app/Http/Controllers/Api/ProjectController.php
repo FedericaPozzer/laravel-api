@@ -22,6 +22,7 @@ class ProjectController extends Controller
         // invio solo 50 caratteri al frontend (per la show decido dopo..NELLA SHOW!)
         // foreach($projects as $project) {
         //     $project->text = $project->getAbstract(50);
+        //     if($project->image) $project->image = $project->getImageUri();
         // }
 
         return response()->json($projects);
@@ -44,9 +45,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $project = Project::where("id", $id)->with("type", "technologies")->first();
+        $project = Project::where("slug", $slug)->with("type", "technologies")->first();
         if(!$project) return response(null, 404);
 
         return response()->json($project);
