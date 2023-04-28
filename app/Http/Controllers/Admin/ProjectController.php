@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Project;
 use App\Models\Type;
 use App\Models\Technology;
+use App\Mail\PublishedProjectMail;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr; //per lo storage (immagini)
+use Illuminate\Support\Facades\Mail; //per le email agli users
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -88,6 +93,12 @@ class ProjectController extends Controller
 
         if(Arr::exists($data, "technologies")) $project->technologies()->attach($data["technologies"]);
         // come nell'update ma senza il detach, che non serve perchè essendo un project nuovo non ho roba vecchia da detachare
+
+        // invio una mail quando pubblico un nuovo project
+        $mail = new PublishedProjectMail();
+        $user_email = Auth::user()->email;
+        Mail::to($user_email)->send($mail);
+
 
         return to_route("admin.projects.show", $project);
        
@@ -172,6 +183,11 @@ class ProjectController extends Controller
         
         if(Arr::exists($data, "technologies")) $project->technologies()->sync($data["technologies"]);
         else $project->technologies()->detach();
+
+        // invio una mail quando modifico project
+        $mail = new PublishedProjectMail($project);
+        $user_email = Auth::user()->email;
+        Mail::to($user_email)->send($mail);
 
 
         return to_route("admin.projects.show", $project);
