@@ -95,7 +95,7 @@ class ProjectController extends Controller
         // come nell'update ma senza il detach, che non serve perchè essendo un project nuovo non ho roba vecchia da detachare
 
         // invio una mail quando pubblico un nuovo project
-        $mail = new PublishedProjectMail();
+        $mail = new PublishedProjectMail($project);
         $user_email = Auth::user()->email;
         Mail::to($user_email)->send($mail);
 

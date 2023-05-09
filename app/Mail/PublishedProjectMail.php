@@ -35,6 +35,7 @@ class PublishedProjectMail extends Mailable
     public function envelope()
     {
         return new Envelope(
+            // to: [ "ristoratore@gmail.com" ],
             subject: 'Published Project from' . env("APP_NAME"),
         );
     }
